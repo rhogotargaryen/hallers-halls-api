@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-    before_action :auth_req, except: [:create, :index]
+    before_action :auth_req, except: [:create, :index, :show]
 
     def create
         user = User.new(user_params)

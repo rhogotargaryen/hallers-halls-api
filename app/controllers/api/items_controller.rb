@@ -1,18 +1,13 @@
 class Api::ItemsController < ApplicationController
-
+    before_action :auth_req, except[:show, :index]
 
     def create
         item = Item.create!(item_params)
-        if item.error?
-            render json: item.error
-        else
-            render json: item
-        end
+        render json: item
     end
 
     def update
         a = Item.find_by(id: params[:id])
-        debugger
         if Item.find_by(id: params[:id])
             Item.update(item_params)
             render json: item
@@ -22,11 +17,19 @@ class Api::ItemsController < ApplicationController
     end
     
     def show
+        item = Item.find_by(id: params[:id])
+        render json: item
     end
 
     def index
         items = Item.all
         render json: items
+    end
+
+    private
+
+    def item_params
+       params.require(:item).permit(:name, :user_id, :description, :price, :img_url)
     end
     
 end
