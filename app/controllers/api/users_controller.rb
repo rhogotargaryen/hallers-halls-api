@@ -1,16 +1,8 @@
 class Api::UsersController < ApplicationController
-    before_action :auth_req, except: [:create, :index, :show]
+    before_action :authenticate_request!, except: [:create, :index, :show]
 
     def create
-        user = User.new(user_params)
-        if user.valid?
-            user.save!
-            render json: user
-            puts("user made and logged in")
-        else
-            render json: user.errors
-            puts("validation errors")
-        end
+        debugger
     end
 
     def index
