@@ -2,7 +2,6 @@ class Api::SessionsController < ApplicationController
   respond_to :json
 
     def create
-      debugger
       render json: (test: "ing")
     end
 

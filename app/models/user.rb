@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable,:validatable,
          :jwt_authenticatable,
          :omniauthable, omniauth_providers: %i[facebook],
          jwt_revocation_strategy: JWTBlacklist
@@ -9,7 +9,6 @@ class User < ApplicationRecord
     has_many :items
     validates :email, presence: true
     validates :name, presence: true
-
 
     def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

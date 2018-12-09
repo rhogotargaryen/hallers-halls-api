@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-
-  
-namespace :api do
-  
   devise_for :users,
              path: '',
              path_names: {
@@ -15,6 +11,10 @@ namespace :api do
                registrations: 'api/registrations',
                omniauth_callbacks: 'api/omniauth_callbacks'
              }
+  
+namespace :api do
+  
+
   resources :users, except: [:new, :edit]
   resources :items, except: [:new, :edit]
 end
