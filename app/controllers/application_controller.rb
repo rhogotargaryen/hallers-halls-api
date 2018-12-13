@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::API
+  include ActionController::MimeResponds
+  respond_to :json
   before_action :configure_permitted_parameters, if: :devise_controller?
+  after_action :no_session
   
 
   def render_resource(resource)
@@ -27,6 +30,10 @@ class ApplicationController < ActionController::API
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
+
+  def no_session
+    request.session_options[:skip] = true
   end
 
 end

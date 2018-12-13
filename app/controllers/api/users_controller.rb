@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-    before_action :authenticate_request!, except: [:create, :index, :show]
+    before_action :authenticate_user!, except: [:create]
 
     def create
     end

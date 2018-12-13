@@ -7,9 +7,8 @@ Rails.application.routes.draw do
                registration: 'signup'
              },
              controllers: {
-               sessions: 'api/sessions',
-               registrations: 'api/registrations',
-               omniauth_callbacks: 'api/omniauth_callbacks'
+               sessions: 'sessions',
+               registrations: 'registrations',
              }
   
 namespace :api do
@@ -20,6 +19,5 @@ namespace :api do
 end
 
 root to: "api/users#index"
-get '/auth/facebook/callback' => 'api/sessions#create'  
 
 end
