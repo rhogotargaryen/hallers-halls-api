@@ -11,8 +11,8 @@ class User < ApplicationRecord
     validates :name, presence: true
 
     def on_jwt_dispatch(token, payload)
-      self.is_logged = true
       puts("********* toaken dispatched *************")
+      puts(token)
     end
 
     def self.from_omniauth(auth)
