@@ -1,5 +1,5 @@
 class ItemSerializer < ActiveModel::Serializer
     belongs_to :user
-    attributes :id, :name, :img_url, :description
+    attributes :id, :name, :img_url, :description, :price
   end
   

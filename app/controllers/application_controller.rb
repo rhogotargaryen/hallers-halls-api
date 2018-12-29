@@ -3,7 +3,6 @@ class ApplicationController < ActionController::API
   respond_to :json
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :no_session
-  
 
   def render_resource(resource)
     if resource.errors.empty?
@@ -20,6 +19,19 @@ class ApplicationController < ActionController::API
           status: '400',
           title: 'Bad Request',
           detail: resource.errors,
+          code: '100'
+        }
+      ]
+    }, status: :bad_request
+  end
+
+  def def_validation_error()
+    render json: {
+      errors: [
+        {
+          status: '400',
+          title: 'Bad Request',
+          detail: "Not Authorized",
           code: '100'
         }
       ]
