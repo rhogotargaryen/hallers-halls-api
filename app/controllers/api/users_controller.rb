@@ -7,8 +7,8 @@ class Api::UsersController < ApplicationController
     end
 
     def show
-        a = User.find_by(id: params[:id])
-        render json: a
+        user = User.find_by(id: params[:id])
+        render json: user
     end
 
     def update
