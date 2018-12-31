@@ -14,8 +14,11 @@ class Api::UsersController < ApplicationController
     def update
         user = User.find(params[:id])
         if current_user === user
-            user.update(user_params)
-            return render json: user
+            if user.update(user_params)
+                return render json: user
+            else
+                return validation_error_with_msg(user)
+            end
         else
             return def_validation_error()
         end

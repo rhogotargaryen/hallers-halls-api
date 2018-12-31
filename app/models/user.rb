@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
     has_many :items
     validates :email, presence: true
+    validates :email, uniqueness: true
     validates :name, presence: true
 
     def on_jwt_dispatch(token, payload)

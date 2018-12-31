@@ -25,6 +25,12 @@ class ApplicationController < ActionController::API
     }, status: :bad_request
   end
 
+  def validation_error_with_msg(resource)
+    render json: {
+      errors: resource.errors.full_messages},
+      status: :bad_request
+  end
+
   def def_validation_error()
     render json: {
       errors: [
