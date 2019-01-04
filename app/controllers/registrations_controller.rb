@@ -7,8 +7,8 @@ class RegistrationsController < Devise::RegistrationsController
     resource.save
     if !resource.errors.messages.empty?
       return validation_error_with_msg(resource)
+    else
+      sign_in(resource_name, resource)
     end
-    sign_in(resource_name, resource)
-    render_resource(resource)
   end
 end
