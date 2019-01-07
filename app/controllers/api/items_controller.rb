@@ -2,8 +2,22 @@ class Api::ItemsController < ApplicationController
     before_action :authenticate_user!, except: [:show]
 
     def create
-        item = Item.create!(item_params)
-        render json: item
+        item = Item.create(item_params)
+        item.user = current_user
+        if item.save 
+            return render_resource(item)
+        else
+            return render json: {
+                errors: [
+                  {
+                    status: '400',
+                    title: 'Bad Request',
+                    detail: "Something went wrong on the backend, changes not saved",
+                    code: '100'
+                  }
+                ]
+              }, status: :bad_request
+        end
     end
 
     def update

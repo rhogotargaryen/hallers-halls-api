@@ -10,5 +10,6 @@ class RegistrationsController < Devise::RegistrationsController
     else
       sign_in(resource_name, resource)
     end
+    render_resource(resource)
   end
 end
