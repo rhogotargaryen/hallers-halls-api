@@ -4,37 +4,21 @@ class Api::ItemsController < ApplicationController
     def create
         item = Item.create(item_params)
         item.user = current_user
-        if item.save 
+        if item.save
             return render_resource(item)
         else
-            return render json: {
-                errors: [
-                  {
-                    status: '400',
-                    title: 'Bad Request',
-                    detail: "Something went wrong on the backend, changes not saved",
-                    code: '100'
-                  }
-                ]
-              }, status: :bad_request
+            errors = {errors: item.errors.full_messages}
+            return render json: errors
         end
     end
 
     def update
         a = Item.find_by(id: params[:id])
-        if current_user === a.user && a.update!(item_params)
+        if current_user === a.user && a.update(item_params)
             return render json: a
         else
-            return render json: {
-                errors: [
-                  {
-                    status: '400',
-                    title: 'Bad Request',
-                    detail: "Something went wrong on the backend, changes not saved",
-                    code: '100'
-                  }
-                ]
-              }, status: :bad_request
+            errors = {errors: a.errors.full_messages}
+            return render json: errors
         end
     end
     
@@ -44,7 +28,11 @@ class Api::ItemsController < ApplicationController
     end
 
     def index
-        items = Item.all
+        if !!params[:user_id]
+            items = Item.find_by(user_id: params[:user_id])
+        else
+            items = Item.all
+        end
         render json: items
     end
 

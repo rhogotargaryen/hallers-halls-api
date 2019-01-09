@@ -12,9 +12,9 @@ Rails.application.routes.draw do
              }
   
 namespace :api do
-  
-
-  resources :users, except: [:new]
+  resources :users, except: [:new] do 
+    resources :items, only: [:show, :edit, :index]
+  end
   resources :items, except: [:new]
 end
 
