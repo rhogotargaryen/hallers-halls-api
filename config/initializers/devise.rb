@@ -18,7 +18,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  #config.mailer_sender = 'no-reply@test.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -266,7 +266,7 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
-  config.secret_key = ENV['DEVISE_SECRET_KEY'] if Rails.env.production?
+  # config.secret_key = ENV['DEVISE_SECRET_KEY'] if Rails.env.production?
 
   config.skip_session_storage = [:params_auth]
 
