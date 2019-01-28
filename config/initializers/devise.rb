@@ -266,7 +266,7 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
-  config.secret_key = ENV['DEVISE_JWT_SECRET_KEY'] if Rails.env.production?
+  config.secret_key = ENV.fetch("DEVISE_JWT_SECRET_KEY") if Rails.env.production?
 
   config.skip_session_storage = [:params_auth]
 
