@@ -10,10 +10,10 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true
     validates :name, presence: true, uniqueness: true
 
-    def on_jwt_dispatch(token, payload)
-      puts("********* toaken dispatched *************")
-      puts(token)
-    end
+    #def on_jwt_dispatch(token, payload)
+      #puts("********* toaken dispatched *************")
+      #puts(token)
+    #end
 
     def auth_options
       super.merge(store: !request.format.json?)
