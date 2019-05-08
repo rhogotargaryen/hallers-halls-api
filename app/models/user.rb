@@ -7,6 +7,8 @@ class User < ApplicationRecord
          
 
     has_many :items
+	has_one_attached :avatar
+
     validates :email, presence: true, uniqueness: true
     validates :name, presence: true, uniqueness: true
 
