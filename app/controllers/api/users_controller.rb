@@ -22,6 +22,7 @@ class Api::UsersController < ApplicationController
         else
             return def_validation_error()
         end
+		puts params
     end
 
     def delete
@@ -35,6 +36,6 @@ class Api::UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name, :email, :password)
+        params.require(:user).permit(:name, :email, :password, :avatar)
     end
 end
