@@ -14,7 +14,10 @@ class Api::UsersController < ApplicationController
     def update
         user = User.find(params[:id])
         if current_user === user
-            if user.update(user_params)
+			byebug
+			user.avatar.attach(user_params[:avatar])
+			puts user.avatar.attached?
+            if user.update(name: user_params[:name], email: user_params[:email])
                 return render json: user
             else
                 return validation_error_with_msg(user)
@@ -22,7 +25,6 @@ class Api::UsersController < ApplicationController
         else
             return def_validation_error()
         end
-		puts params
     end
 
     def delete
